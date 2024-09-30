@@ -1,0 +1,17 @@
+{
+  "name": "exercicio-backend-missao-aprendizado-iniciante-deploy-e-seguranca",
+  "version": "1.0.0",
+  "description": "Exercicio do Projeto de Missão de Aprendizado da Profissão Dev Backend JavaScript, nivel iniciante: Deploy e Segurança",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "nodemon": "^3.1.7"
+  }
+}
