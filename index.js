@@ -3,6 +3,7 @@ const express = require('express')
 const { MongoClient, ObjectId } = require('mongodb')
 
 const app = express()
+app.use(express.json())
 
 const dbUrl = "mongodb+srv://admin:KJsim29sjakjm437A@cluster0.1dfpx.mongodb.net"
 const dbName = "exercicio-deploy-e-segurança"
@@ -31,7 +32,7 @@ async function main() {
     })
 
     // Endpoint Read by ID [GET]
-    app.get('/evento/:id', async function (req,res) {
+    app.get('/evento/:id', async function (req, res) {
         const id = req.params.id
 
         const item = await collection.findOne({ _id: new ObjectId(id) })
@@ -43,7 +44,26 @@ async function main() {
         res.send(item)
     })
 
-    app.listen(3000)
+    // Endpoint Create [POST]
+    app.post("/evento", async function (req, res) {
+        const novoItem = req.body
+
+        if(!novoItem.nome) {
+            return res.status(400).send('Corpo da requisição deve conter a propriedade `nome`')
+        }
+        if(!novoItem.data) {
+            return res.status(400).send('Corpo da requisição deve conter a propriedade `data`')
+        }
+        if(!novoItem.local) {
+            return res.status(400).send('Corpo da requisição deve conter a propriedade `local`')
+        }
+        await collection.insertOne(novoItem)
+        
+        res.send(novoItem)
+    })
+    
+
+    app.listen(3000)  
 }
 
-main()
+main() 
