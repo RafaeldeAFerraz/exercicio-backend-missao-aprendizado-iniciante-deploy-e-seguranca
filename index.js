@@ -84,7 +84,20 @@ async function main() {
         
         res.status(201).send(novoItem)
     })
-    
+
+    app.delete('/evento/:id', async function (req, res) {
+        const id = req.params.id
+
+        const item = collection.findOne({ _id: new ObjectId(id) })
+
+        if(!item) {
+            return res.status(404).send('Item não econtrado')
+        }
+
+        await collection.deleteOne({ _id: new ObjectId(id)})
+
+        res.send('Item removido com sucesso: ' + id)
+    })
     app.listen(3000)  
 }
 
