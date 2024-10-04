@@ -1,11 +1,11 @@
-
+require('dotenv').config()
 const express = require('express')
 const { MongoClient, ObjectId } = require('mongodb')
 
 const app = express()
 app.use(express.json())
 
-const dbUrl = "mongodb+srv://admin:KJsim29sjakjm437A@cluster0.1dfpx.mongodb.net"
+const dbUrl = process.env.DATABASE_URL
 const dbName = "exercicio-deploy-e-segurança"
 
 
@@ -101,4 +101,4 @@ async function main() {
     app.listen(3000)  
 }
 
-main() 
+main()
